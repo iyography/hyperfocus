@@ -1,0 +1,9 @@
+{
+  "name": "hyperfocus",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @hyperfocus/web dev",
+    "build": "pnpm --filter @hyperfocus/web build",
+    "preview": "pnpm --filter @hyperfocus/web preview"
+  }
+}

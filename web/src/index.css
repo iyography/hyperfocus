@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-surface: #13131a;
+  --color-bg-elevated: #1c1c27;
+  --color-border: #2a2a3a;
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #8888a0;
+  --color-accent: #7c5cff;
+  --color-accent-hover: #6a4ae0;
+  --color-accent-glow: rgba(124, 92, 255, 0.2);
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-xp-gold: #fbbf24;
+  --color-danger: #ef4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #0a0a0f;
+  color: #f0f0f5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0a0a0f;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes mesh-shift {
+  0%, 100% {
+    background-position: 0% 50%, 100% 50%, 50% 100%;
+  }
+  25% {
+    background-position: 100% 0%, 0% 100%, 100% 0%;
+  }
+  50% {
+    background-position: 50% 100%, 50% 0%, 0% 50%;
+  }
+  75% {
+    background-position: 0% 0%, 100% 100%, 50% 0%;
+  }
+}
+
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(124, 92, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  background-size: 200% 200%, 200% 200%, 200% 200%;
+  animation: mesh-shift 20s ease-in-out infinite;
+}
+
+.glass {
+  background: rgba(19, 19, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(42, 42, 58, 0.5);
+  border-radius: 16px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a3a;
+  border-radius: 3px;
+}
+
+/* driver.js dark theme overrides */
+.driver-popover {
+  background: #13131a !important;
+  border: 1px solid #2a2a3a !important;
+  color: #f0f0f5 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 30px rgba(124, 92, 255, 0.15) !important;
+}
+.driver-popover .driver-popover-title {
+  color: #f0f0f5 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+.driver-popover .driver-popover-description {
+  color: #8888a0 !important;
+  font-size: 14px !important;
+}
+.driver-popover .driver-popover-progress-text {
+  color: #8888a0 !important;
+}
+.driver-popover .driver-popover-navigation-btns button {
+  background: #7c5cff !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 6px 16px !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+}
+.driver-popover .driver-popover-navigation-btns .driver-popover-prev-btn {
+  background: #1c1c27 !important;
+  color: #8888a0 !important;
+  border: 1px solid #2a2a3a !important;
+}
+.driver-popover .driver-popover-close-btn {
+  color: #8888a0 !important;
+}

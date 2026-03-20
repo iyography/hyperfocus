@@ -1,0 +1,6 @@
+{
+  "name": "@hyperfocus/extension",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Hyperfocus Chrome Extension - distraction detection and focus monitoring"
+}

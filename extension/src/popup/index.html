@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyperfocus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 320px;
+      min-height: 200px;
+      background: #0a0a0f;
+      color: #f0f0f5;
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 16px;
+    }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .logo .accent { color: #7c5cff; font-weight: 700; }
+    .logo .name { color: #f0f0f5; font-weight: 700; }
+    .badge { background: rgba(34,197,94,0.15); color: #22c55e; padding: 2px 8px; border-radius: 99px; font-size: 11px; }
+    .stats { background: #13131a; border: 1px solid #2a2a3a; border-radius: 12px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .level { width: 36px; height: 36px; background: rgba(124,92,255,0.15); border: 1px solid rgba(124,92,255,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #7c5cff; font-weight: 700; }
+    .info { flex: 1; }
+    .name-text { font-size: 13px; font-weight: 600; }
+    .xp-text { font-size: 11px; color: #8888a0; }
+    .streak { text-align: right; font-size: 13px; font-weight: 700; }
+    .btn { display: block; width: 100%; padding: 10px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 13px; margin-bottom: 8px; }
+    .btn-primary { background: #7c5cff; color: white; }
+    .btn-secondary { background: #1c1c27; color: #8888a0; border: 1px solid #2a2a3a; }
+    .no-session { background: #13131a; border: 1px solid #2a2a3a; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 12px; }
+    .no-session p { font-size: 12px; color: #8888a0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo"><span class="accent">Hyper</span><span class="name">focus</span></div>
+    <span class="badge">Active</span>
+  </div>
+  <div class="stats">
+    <div class="level" id="level">-</div>
+    <div class="info">
+      <div class="name-text" id="user-name">Loading...</div>
+      <div class="xp-text" id="user-xp"></div>
+    </div>
+    <div class="streak" id="streak"></div>
+  </div>
+  <div class="no-session">
+    <p>Open Hyperfocus web app to start a session</p>
+  </div>
+  <button class="btn btn-primary" id="open-app">Open Hyperfocus</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
