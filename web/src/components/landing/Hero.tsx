@@ -15,8 +15,9 @@ export default function Hero({ onViewDemo }: HeroProps) {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="relative z-10 max-w-3xl mx-auto"
+        className="relative z-10 max-w-3xl mx-auto flex flex-col items-center"
       >
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -27,8 +28,9 @@ export default function Hero({ onViewDemo }: HeroProps) {
           Built for ADHD entrepreneurs
         </motion.div>
 
+        {/* Title */}
         <motion.h1
-          className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight mb-6"
+          className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -39,8 +41,9 @@ export default function Hero({ onViewDemo }: HeroProps) {
           <span className="text-text-primary">focus</span>
         </motion.h1>
 
+        {/* Tagline */}
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl text-text-secondary max-w-2xl mx-auto mb-4"
+          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-2xl mx-auto mb-4 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -48,8 +51,9 @@ export default function Hero({ onViewDemo }: HeroProps) {
           Your daily focus engine. One task. One session. Real progress.
         </motion.p>
 
+        {/* Sub-tagline */}
         <motion.p
-          className="text-sm sm:text-base text-[#666680] max-w-lg mx-auto mb-12"
+          className="text-sm sm:text-base text-[rgba(136,136,160,0.7)] max-w-lg mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -58,19 +62,20 @@ export default function Hero({ onViewDemo }: HeroProps) {
           important thing, lock in, and get it done.
         </motion.p>
 
+        {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          <Button size="lg" onClick={onViewDemo}>
+          <Button size="lg" onClick={onViewDemo} className="w-full sm:w-auto min-w-[160px]">
             View Demo
           </Button>
-          <Button variant="secondary" size="lg">
-            Sign Up
+          <Button variant="secondary" size="lg" className="w-full sm:w-auto min-w-[160px]">
+            Sign Up Free
           </Button>
-          <Button variant="ghost" size="lg">
+          <Button variant="ghost" size="lg" className="w-full sm:w-auto min-w-[120px]">
             Log In
           </Button>
         </motion.div>
@@ -86,7 +91,7 @@ export default function Hero({ onViewDemo }: HeroProps) {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-border flex justify-center pt-2"
+          className="w-6 h-10 rounded-full border-2 border-[rgba(42,42,58,0.5)] flex justify-center pt-2"
         >
           <div className="w-1 h-2 rounded-full bg-text-secondary" />
         </motion.div>

@@ -13,13 +13,13 @@ export default function DashboardPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-6"
+      className="space-y-8"
     >
-      <div>
-        <h1 className="text-3xl font-bold text-text-primary">
+      <div className="text-center md:text-left">
+        <h1 className="text-3xl md:text-4xl font-bold text-text-primary">
           Welcome back, {user.displayName.split(' ')[0]}
         </h1>
-        <p className="text-text-secondary mt-1">Let's make today count.</p>
+        <p className="text-text-secondary mt-2 text-lg">Let's make today count.</p>
       </div>
 
       <TodayCard />

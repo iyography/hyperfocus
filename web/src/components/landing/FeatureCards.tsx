@@ -92,7 +92,7 @@ export default function FeatureCards() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-primary">
           Everything you need to{' '}
           <span className="text-accent">lock in</span>
         </h2>

@@ -38,7 +38,7 @@ export default function TaskBreakdownPage() {
         <div className="text-sm text-accent mb-4 font-medium">Today's Focus</div>
         <h2 className="text-xl font-bold text-text-primary mb-6">{todayCheckIn.task}</h2>
 
-        <div className="glass rounded-xl p-4 mb-6">
+        <div className="bg-[rgba(19,19,26,0.7)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-xl p-4 mb-6">
           <p className="text-text-secondary text-sm mb-1">That sounds like a big task.</p>
           <p className="text-text-primary font-semibold">What is the first tiny step?</p>
         </div>

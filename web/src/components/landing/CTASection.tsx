@@ -15,11 +15,11 @@ export default function CTASection({ onViewDemo }: CTASectionProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="glass rounded-3xl p-12 relative overflow-hidden">
+        <div className="bg-[rgba(19,19,26,0.7)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-3xl p-12 relative overflow-hidden">
           {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgba(124,92,255,0.05)] to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[rgba(124,92,255,0.08)] to-transparent pointer-events-none" />
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10 text-text-primary">
             Ready to{' '}
             <span className="bg-gradient-to-r from-accent to-purple-400 bg-clip-text text-transparent">
               lock in
@@ -30,10 +30,10 @@ export default function CTASection({ onViewDemo }: CTASectionProps) {
             See how Hyperfocus transforms your daily workflow. Try the interactive demo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-            <Button size="lg" onClick={onViewDemo}>
+            <Button size="lg" onClick={onViewDemo} className="min-w-[160px]">
               View Demo
             </Button>
-            <Button variant="secondary" size="lg">
+            <Button variant="secondary" size="lg" className="min-w-[160px]">
               Sign Up Free
             </Button>
           </div>

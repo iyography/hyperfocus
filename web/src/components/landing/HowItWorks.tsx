@@ -33,7 +33,7 @@ export default function HowItWorks() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-primary">
           Simple by <span className="text-accent">design</span>
         </h2>
         <p className="text-text-secondary text-lg max-w-xl mx-auto">
@@ -56,7 +56,7 @@ export default function HowItWorks() {
                 {step.number}
               </div>
               {index < steps.length - 1 && (
-                <div className="w-px h-12 bg-border mx-auto mt-3" />
+                <div className="w-px h-12 bg-[rgba(42,42,58,0.5)] mx-auto mt-3" />
               )}
             </div>
             <div className="pt-2">

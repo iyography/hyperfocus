@@ -33,7 +33,7 @@ export default function Modal({ isOpen, onClose, children, className }: ModalPro
         >
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
           <motion.div
-            className={cn('glass rounded-2xl p-8 relative z-10 max-w-md w-full', className)}
+            className={cn('bg-[rgba(19,19,26,0.9)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-2xl p-8 relative z-10 max-w-md w-full', className)}
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
