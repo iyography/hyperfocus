@@ -10,6 +10,7 @@ const navItems = [
 export default function NavBar() {
   return (
     <nav
+      aria-label="Main navigation"
       className={cn(
         'fixed bottom-0 left-0 right-0 z-40',
         'bg-[rgba(19,19,26,0.85)] backdrop-blur-xl border-t border-[rgba(42,42,58,0.5)]',
