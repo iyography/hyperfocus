@@ -26,17 +26,17 @@ function PresetGrid({
 
   return (
     <div>
-      <div className="text-sm text-text-secondary mb-3">{label}</div>
+      <div className="text-sm text-secondary mb-3 font-medium">{label}</div>
       <div className="flex flex-wrap gap-2 mb-3">
         {presets.map((preset) => (
           <button
             key={preset.seconds}
             onClick={() => onChange(preset.seconds)}
             className={cn(
-              'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer',
+              'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer',
               value === preset.seconds
-                ? 'bg-accent text-white shadow-[0_0_15px_var(--color-accent-glow)]'
-                : 'bg-bg-elevated text-text-secondary border border-border hover:border-[rgba(124,92,255,0.5)] hover:text-text-primary',
+                ? 'bg-accent text-white shadow-sm glow-sm'
+                : 'bg-surface text-secondary border border-themed-border hover:border-accent/30 hover:text-foreground',
             )}
           >
             {preset.label}
@@ -57,9 +57,9 @@ function PresetGrid({
           }}
           min={1}
           max={480}
-          className="w-32 bg-bg-elevated border border-border rounded-lg px-3 py-2 text-sm text-text-primary placeholder:text-[rgba(136,136,160,0.4)] focus:outline-none focus:border-accent transition-all"
+          className="w-32 bg-input border border-input-border rounded-xl px-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 transition-all"
         />
-        <span className="text-xs text-text-secondary">minutes</span>
+        <span className="text-xs text-secondary">minutes</span>
       </div>
     </div>
   );
@@ -108,8 +108,8 @@ export function QuickDurationPicker({
             className={cn(
               'px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer',
               value === preset.seconds
-                ? 'bg-accent text-white shadow-[0_0_15px_var(--color-accent-glow)]'
-                : 'bg-bg-elevated text-text-secondary border border-border hover:border-[rgba(124,92,255,0.5)]',
+                ? 'bg-accent text-white shadow-sm glow-sm'
+                : 'bg-surface text-secondary border border-themed-border hover:border-accent/30',
             )}
           >
             {preset.label}

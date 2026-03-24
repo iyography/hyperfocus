@@ -18,3 +18,20 @@ export interface CheckIn {
 }
 
 export type TimerStatus = 'idle' | 'focusing' | 'paused' | 'break' | 'overtime' | 'complete';
+
+export interface PlanTask {
+  id: string;
+  text: string;
+  estimate: number; // minutes
+  done: boolean;
+  movedToTomorrow: boolean;
+}
+
+export interface DailyPlan {
+  date: string; // YYYY-MM-DD
+  priority: string;
+  tasks: PlanTask[];
+  reflection: string;
+  focusRating: number; // 1-5
+  completed: boolean;
+}

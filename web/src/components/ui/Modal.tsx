@@ -31,9 +31,12 @@ export default function Modal({ isOpen, onClose, children, className }: ModalPro
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+          <div className="absolute inset-0 bg-overlay glass" onClick={onClose} />
           <motion.div
-            className={cn('bg-[rgba(19,19,26,0.9)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-2xl p-8 relative z-10 max-w-md w-full', className)}
+            className={cn(
+              'bg-card glass-strong border border-card-border rounded-2xl p-8 relative z-10 max-w-md w-full shadow-elevated',
+              className,
+            )}
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}

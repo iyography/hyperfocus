@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hyperfocus Icon Generator</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0a0a0f; color: #f0f0f5; padding: 40px; text-align: center; }
+    h1 { color: #6366f1; }
+    .preview { display: inline-flex; gap: 24px; align-items: end; margin: 24px 0; }
+    .preview canvas { border: 1px solid #2a2a3a; border-radius: 8px; }
+    .preview label { display: block; font-size: 12px; color: #8888a0; margin-top: 4px; }
+    button { background: #6366f1; color: white; border: none; padding: 14px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 24px; }
+    button:hover { background: #4f46e5; }
+    p { color: #8888a0; font-size: 14px; }
+    .status { margin-top: 12px; color: #a78bfa; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Hyperfocus Icon Generator</h1>
+  <p>Click the button to generate and download PNG icons for the Chrome extension.</p>
+  <div class="preview">
+    <div><canvas id="c16" width="16" height="16"></canvas><label>16x16</label></div>
+    <div><canvas id="c48" width="48" height="48"></canvas><label>48x48</label></div>
+    <div><canvas id="c128" width="128" height="128"></canvas><label>128x128</label></div>
+  </div>
+  <br>
+  <button onclick="downloadAll()">Download All PNGs</button>
+  <div class="status" id="status"></div>
+
+  <script>
+    // SVG icon sources mapped by size
+    const SVG_SOURCES = {
+      16: 'icons/icon-16.svg',
+      48: 'icons/icon-48.svg',
+      128: 'icons/icon-128.svg'
+    };
+
+    // Render an SVG file onto a canvas at native resolution
+    function renderSVG(canvas, svgPath) {
+      return new Promise((resolve, reject) => {
+        const size = canvas.width;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, size, size);
+
+        fetch(svgPath)
+          .then(r => r.text())
+          .then(svgText => {
+            const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+            img.onload = () => {
+              ctx.drawImage(img, 0, 0, size, size);
+              URL.revokeObjectURL(url);
+              resolve();
+            };
+            img.onerror = () => {
+              URL.revokeObjectURL(url);
+              // Fallback: draw procedurally
+              drawIconFallback(canvas);
+              resolve();
+            };
+            img.src = url;
+          })
+          .catch(() => {
+            drawIconFallback(canvas);
+            resolve();
+          });
+      });
+    }
+
+    // Procedural fallback if SVG files can't be loaded
+    function drawIconFallback(canvas) {
+      const s = canvas.width;
+      const ctx = canvas.getContext('2d');
+      const cx = s / 2, cy = s / 2;
+      ctx.clearRect(0, 0, s, s);
+
+      // Rounded rect background
+      const pad = s * 0.0625;
+      const r = s * 0.22;
+      const w = s - pad * 2;
+      roundRect(ctx, pad, pad, w, w, r);
+      ctx.fillStyle = '#0f0f1a';
+      ctx.fill();
+
+      // Mesh gradient overlay 1
+      const g1 = ctx.createRadialGradient(s * 0.3, s * 0.3, 0, s * 0.3, s * 0.3, s * 0.7);
+      g1.addColorStop(0, 'rgba(167,139,250,0.9)');
+      g1.addColorStop(0.5, 'rgba(99,102,241,0.8)');
+      g1.addColorStop(1, 'rgba(67,56,202,0)');
+      ctx.save();
+      roundRect(ctx, pad, pad, w, w, r);
+      ctx.clip();
+      ctx.fillStyle = g1;
+      ctx.fillRect(0, 0, s, s);
+
+      // Mesh gradient overlay 2
+      const g2 = ctx.createRadialGradient(s * 0.7, s * 0.7, 0, s * 0.7, s * 0.7, s * 0.65);
+      g2.addColorStop(0, 'rgba(129,140,248,0.85)');
+      g2.addColorStop(0.6, 'rgba(99,102,241,0.6)');
+      g2.addColorStop(1, 'rgba(55,48,163,0)');
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, s, s);
+      ctx.restore();
+
+      // Border
+      roundRect(ctx, pad, pad, w, w, r);
+      ctx.strokeStyle = 'rgba(99,102,241,0.4)';
+      ctx.lineWidth = Math.max(0.5, s * 0.01);
+      ctx.stroke();
+
+      // Focus ring (skip at 16px)
+      if (s >= 48) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, s * 0.29, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(99,102,241,0.2)';
+        ctx.lineWidth = Math.max(0.75, s * 0.015);
+        ctx.stroke();
+      }
+
+      // H mark
+      const hGrad = ctx.createLinearGradient(s * 0.2, s * 0.2, s * 0.8, s * 0.8);
+      hGrad.addColorStop(0, '#e0e7ff');
+      hGrad.addColorStop(1, '#a78bfa');
+      ctx.fillStyle = hGrad;
+
+      const barW = Math.max(1.5, s * 0.047);
+      const barH = s * 0.44;
+      const topY = cy - barH / 2;
+      const leftX = cx - s * 0.19;
+      const rightX = cx + s * 0.19 - barW;
+      const crossY = cy - barW / 2;
+      const crossW = rightX + barW - leftX;
+
+      // Left bar
+      roundRect(ctx, leftX, topY, barW, barH, barW / 2);
+      ctx.fill();
+      // Right bar
+      roundRect(ctx, rightX, topY, barW, barH, barW / 2);
+      ctx.fill();
+      // Crossbar
+      roundRect(ctx, leftX + barW * 0.5, crossY, crossW - barW, barW, barW / 2);
+      ctx.fill();
+
+      // Center amber dot (skip at 16px)
+      if (s >= 48) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, Math.max(0.75, s * 0.031), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245,158,11,0.65)';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(cx, cy, Math.max(0.5, s * 0.016), 0, Math.PI * 2);
+        ctx.fillStyle = '#fef3c7';
+        ctx.fill();
+      }
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function download(canvas, name) {
+      const link = document.createElement('a');
+      link.download = name;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadAll() {
+      const status = document.getElementById('status');
+      status.textContent = 'Generating PNGs...';
+
+      download(document.getElementById('c16'), 'icon-16.png');
+      setTimeout(() => download(document.getElementById('c48'), 'icon-48.png'), 200);
+      setTimeout(() => {
+        download(document.getElementById('c128'), 'icon-128.png');
+        status.textContent = 'All 3 PNGs downloaded!';
+      }, 400);
+    }
+
+    // Render previews on load — try SVG files first, fall back to procedural
+    async function init() {
+      const sizes = [
+        { id: 'c16', size: 16 },
+        { id: 'c48', size: 48 },
+        { id: 'c128', size: 128 }
+      ];
+
+      for (const { id, size } of sizes) {
+        const canvas = document.getElementById(id);
+        try {
+          await renderSVG(canvas, SVG_SOURCES[size]);
+        } catch {
+          drawIconFallback(canvas);
+        }
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

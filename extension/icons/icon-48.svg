@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <radialGradient id="m1" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="m2" cx="70%" cy="70%" r="65%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3730a3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="m3" cx="65%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mring" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="mh" x1="10" y1="10" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <filter id="mg" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="mgs" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0"/>
+    </filter>
+    <clipPath id="mc">
+      <rect x="3" y="3" width="42" height="42" rx="10"/>
+    </clipPath>
+  </defs>
+
+  <!-- Glow -->
+  <rect x="3" y="3" width="42" height="42" rx="10" fill="#6366f1" filter="url(#mg)" opacity="0.4"/>
+
+  <!-- Base -->
+  <rect x="3" y="3" width="42" height="42" rx="10" fill="#0f0f1a"/>
+
+  <!-- Mesh -->
+  <g clip-path="url(#mc)">
+    <rect x="3" y="3" width="42" height="42" fill="url(#m1)"/>
+    <rect x="3" y="3" width="42" height="42" fill="url(#m2)"/>
+    <rect x="3" y="3" width="42" height="42" fill="url(#m3)"/>
+  </g>
+
+  <!-- Border -->
+  <rect x="3" y="3" width="42" height="42" rx="10" fill="none" stroke="url(#mring)" stroke-width="0.75" opacity="0.4"/>
+
+  <!-- Focus ring -->
+  <circle cx="24" cy="24" r="14" fill="none" stroke="url(#mring)" stroke-width="0.75" opacity="0.2"/>
+
+  <!-- H mark -->
+  <g filter="url(#mgs)">
+    <rect x="15" y="13" width="3" height="22" rx="1.5" fill="url(#mh)"/>
+    <rect x="30" y="13" width="3" height="22" rx="1.5" fill="url(#mh)"/>
+    <rect x="16.5" y="22.5" width="15" height="3" rx="1.5" fill="url(#mh)"/>
+  </g>
+
+  <!-- Center dot -->
+  <circle cx="24" cy="24" r="1.5" fill="#f59e0b" opacity="0.65"/>
+  <circle cx="24" cy="24" r="0.75" fill="#fef3c7"/>
+</svg>

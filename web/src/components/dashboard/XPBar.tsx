@@ -12,17 +12,17 @@ export default function XPBar() {
   return (
     <Card className="flex items-center gap-4" data-tour="xp-bar">
       <div className="flex-shrink-0">
-        <div className="w-12 h-12 rounded-xl bg-[rgba(124,92,255,0.15)] border border-[rgba(124,92,255,0.25)] flex items-center justify-center">
+        <div className="w-12 h-12 rounded-xl bg-accent-soft border border-accent/15 flex items-center justify-center">
           <span className="text-accent font-bold text-lg">{level.level}</span>
         </div>
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="font-semibold text-text-primary">{level.name}</span>
+          <span className="font-semibold text-foreground">{level.name}</span>
           <Badge variant="gold">{user.totalXp} XP</Badge>
         </div>
         <ProgressBar progress={xpProgress.progress} color="bg-xp-gold" />
-        <div className="text-xs text-text-secondary mt-1">
+        <div className="text-xs text-secondary mt-1">
           {xpProgress.current} / {xpProgress.next} XP to Level {level.level + 1}
         </div>
       </div>

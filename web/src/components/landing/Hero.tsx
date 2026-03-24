@@ -8,9 +8,6 @@ interface HeroProps {
 export default function Hero({ onViewDemo }: HeroProps) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
-      {/* Glow orb behind title */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[rgba(124,92,255,0.08)] blur-[120px] pointer-events-none" />
-
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -22,7 +19,7 @@ export default function Hero({ onViewDemo }: HeroProps) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(19,19,26,0.7)] border border-[rgba(42,42,58,0.5)] text-sm text-text-secondary mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card glass border border-card-border text-sm text-secondary mb-8 shadow-card"
         >
           <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
           Built for ADHD entrepreneurs
@@ -35,15 +32,13 @@ export default function Hero({ onViewDemo }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <span className="bg-gradient-to-r from-white via-accent to-purple-400 bg-clip-text text-transparent">
-            Hyper
-          </span>
-          <span className="text-text-primary">focus</span>
+          <span className="text-gradient">Hyper</span>
+          <span className="text-foreground">focus</span>
         </motion.h1>
 
         {/* Tagline */}
         <motion.p
-          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-2xl mx-auto mb-4 leading-relaxed"
+          className="text-xl sm:text-2xl md:text-3xl text-secondary max-w-2xl mx-auto mb-4 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -53,7 +48,7 @@ export default function Hero({ onViewDemo }: HeroProps) {
 
         {/* Sub-tagline */}
         <motion.p
-          className="text-sm sm:text-base text-[rgba(136,136,160,0.7)] max-w-lg mx-auto mb-12"
+          className="text-sm sm:text-base text-muted max-w-lg mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -91,9 +86,9 @@ export default function Hero({ onViewDemo }: HeroProps) {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-[rgba(42,42,58,0.5)] flex justify-center pt-2"
+          className="w-6 h-10 rounded-full border-2 border-themed-border flex justify-center pt-2"
         >
-          <div className="w-1 h-2 rounded-full bg-text-secondary" />
+          <div className="w-1 h-2 rounded-full bg-secondary" />
         </motion.div>
       </motion.div>
     </section>

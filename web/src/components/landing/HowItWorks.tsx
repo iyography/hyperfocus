@@ -33,10 +33,10 @@ export default function HowItWorks() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-text-primary">
-          Simple by <span className="text-accent">design</span>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+          Simple by <span className="text-gradient">design</span>
         </h2>
-        <p className="text-text-secondary text-lg max-w-xl mx-auto">
+        <p className="text-secondary text-lg max-w-xl mx-auto">
           Not another task manager. A daily focus ritual in 4 steps.
         </p>
       </motion.div>
@@ -52,16 +52,16 @@ export default function HowItWorks() {
             transition={{ duration: 0.5, delay: index * 0.15 }}
           >
             <div className="flex-shrink-0">
-              <div className="w-12 h-12 rounded-xl bg-[rgba(124,92,255,0.1)] border border-[rgba(124,92,255,0.2)] flex items-center justify-center text-accent font-bold text-sm">
+              <div className="w-12 h-12 rounded-xl bg-accent-soft border border-accent/15 flex items-center justify-center text-accent font-bold text-sm shadow-card">
                 {step.number}
               </div>
               {index < steps.length - 1 && (
-                <div className="w-px h-12 bg-[rgba(42,42,58,0.5)] mx-auto mt-3" />
+                <div className="w-px h-12 bg-themed-border mx-auto mt-3" />
               )}
             </div>
             <div className="pt-2">
-              <h3 className="text-xl font-semibold text-text-primary mb-1">{step.title}</h3>
-              <p className="text-text-secondary leading-relaxed">{step.description}</p>
+              <h3 className="text-xl font-semibold text-foreground mb-1">{step.title}</h3>
+              <p className="text-secondary leading-relaxed">{step.description}</p>
             </div>
           </motion.div>
         ))}

@@ -11,19 +11,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-accent text-white hover:bg-accent-hover shadow-[0_0_20px_rgba(124,92,255,0.3)] hover:shadow-[0_0_30px_rgba(124,92,255,0.45)] active:scale-[0.98]',
+    'bg-accent text-white hover:bg-accent-hover shadow-[0_2px_12px_var(--th-accent-glow)] hover:shadow-[0_4px_20px_var(--th-accent-glow)] active:scale-[0.97]',
   secondary:
-    'bg-[rgba(28,28,39,0.8)] text-text-primary border border-[rgba(42,42,58,0.6)] hover:border-[rgba(124,92,255,0.4)] hover:bg-[rgba(28,28,39,1)] active:scale-[0.98]',
+    'bg-surface text-foreground border border-themed-border hover:bg-elevated hover:border-accent/30 active:scale-[0.97]',
   ghost:
-    'text-text-secondary hover:text-text-primary hover:bg-[rgba(28,28,39,0.6)] active:scale-[0.98]',
+    'text-secondary hover:text-foreground hover:bg-surface active:scale-[0.97]',
   danger:
-    'bg-[rgba(239,68,68,0.1)] text-danger border border-[rgba(239,68,68,0.2)] hover:bg-[rgba(239,68,68,0.2)] active:scale-[0.98]',
+    'bg-danger-soft text-danger border border-danger/20 hover:bg-danger/15 active:scale-[0.97]',
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm rounded-lg',
-  md: 'px-6 py-2.5 text-sm rounded-xl',
-  lg: 'px-8 py-3.5 text-base font-semibold rounded-xl',
+  sm: 'px-4 py-2 text-sm rounded-xl',
+  md: 'px-5 py-2.5 text-sm rounded-xl',
+  lg: 'px-8 py-3.5 text-base font-semibold rounded-2xl',
 };
 
 export default function Button({
@@ -38,6 +38,7 @@ export default function Button({
       className={cn(
         'font-medium transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-2',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-primary',
         variants[variant],
         sizes[size],
         className,

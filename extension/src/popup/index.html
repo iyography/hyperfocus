@@ -4,50 +4,373 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hyperfocus</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      width: 320px;
-      min-height: 200px;
-      background: #0a0a0f;
-      color: #f0f0f5;
-      font-family: system-ui, -apple-system, sans-serif;
-      padding: 16px;
-    }
-    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .logo .accent { color: #7c5cff; font-weight: 700; }
-    .logo .name { color: #f0f0f5; font-weight: 700; }
-    .badge { background: rgba(34,197,94,0.15); color: #22c55e; padding: 2px 8px; border-radius: 99px; font-size: 11px; }
-    .stats { background: #13131a; border: 1px solid #2a2a3a; border-radius: 12px; padding: 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .level { width: 36px; height: 36px; background: rgba(124,92,255,0.15); border: 1px solid rgba(124,92,255,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #7c5cff; font-weight: 700; }
-    .info { flex: 1; }
-    .name-text { font-size: 13px; font-weight: 600; }
-    .xp-text { font-size: 11px; color: #8888a0; }
-    .streak { text-align: right; font-size: 13px; font-weight: 700; }
-    .btn { display: block; width: 100%; padding: 10px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 13px; margin-bottom: 8px; }
-    .btn-primary { background: #7c5cff; color: white; }
-    .btn-secondary { background: #1c1c27; color: #8888a0; border: 1px solid #2a2a3a; }
-    .no-session { background: #13131a; border: 1px solid #2a2a3a; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 12px; }
-    .no-session p { font-size: 12px; color: #8888a0; }
-  </style>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <div class="header">
+
+  <!-- ====== Header ====== -->
+  <div class="popup-header">
     <div class="logo"><span class="accent">Hyper</span><span class="name">focus</span></div>
-    <span class="badge">Active</span>
+    <span class="header-badge idle" id="status-badge">Idle</span>
   </div>
-  <div class="stats">
-    <div class="level" id="level">-</div>
-    <div class="info">
-      <div class="name-text" id="user-name">Loading...</div>
-      <div class="xp-text" id="user-xp"></div>
+
+  <!-- ====== Tab Navigation ====== -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" data-tab="dashboard" role="tab" aria-selected="true">Dashboard</button>
+    <button class="tab-btn" data-tab="timer" role="tab" aria-selected="false">Timer</button>
+    <button class="tab-btn" data-tab="plan" role="tab" aria-selected="false">Plan</button>
+    <button class="tab-btn" data-tab="settings" role="tab" aria-selected="false">Settings</button>
+    <button class="tab-btn" data-tab="saved" role="tab" aria-selected="false">Saved</button>
+  </nav>
+
+  <!-- ====== Scrollable Content ====== -->
+  <div class="tab-content-wrapper">
+
+    <!-- ======================================
+         DASHBOARD TAB
+         ====================================== -->
+    <div class="tab-panel active" id="tab-dashboard" role="tabpanel">
+
+      <!-- User Stats -->
+      <div class="card">
+        <div class="stats-bar">
+          <div class="level-badge" id="dash-level">1</div>
+          <div class="stats-info">
+            <div class="stats-name" id="dash-name">User</div>
+            <div class="stats-xp" id="dash-xp">0 XP</div>
+          </div>
+          <div class="stats-streak" id="dash-streak">🔥 0</div>
+        </div>
+      </div>
+
+      <!-- Current Task -->
+      <div class="card card-accent" id="dash-task-card">
+        <div class="card-title">Current Task</div>
+        <div class="current-task-text" id="dash-task-text">No active task</div>
+        <div class="current-task-hint hidden" id="dash-task-hint">Is this your most important task?</div>
+      </div>
+
+      <!-- Quick Focus Toggle -->
+      <div class="card">
+        <div class="focus-toggle-row">
+          <span class="focus-toggle-label">Quick Focus Mode</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="dash-focus-toggle" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Today's Progress -->
+      <div class="card">
+        <div class="card-title">Today's Progress</div>
+        <div class="progress-row">
+          <div class="progress-stat accent">
+            <div class="value" id="dash-sessions">0</div>
+            <div class="label">Sessions</div>
+          </div>
+          <div class="progress-stat success">
+            <div class="value" id="dash-focus-time">0m</div>
+            <div class="label">Focus</div>
+          </div>
+          <div class="progress-stat warning">
+            <div class="value" id="dash-xp-today">0</div>
+            <div class="label">XP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <button class="btn btn-primary btn-full" id="dash-start-focus">Start Focus</button>
+        <button class="btn btn-secondary btn-full" id="dash-open-app">Open Web App</button>
+      </div>
     </div>
-    <div class="streak" id="streak"></div>
-  </div>
-  <div class="no-session">
-    <p>Open Hyperfocus web app to start a session</p>
-  </div>
-  <button class="btn btn-primary" id="open-app">Open Hyperfocus</button>
+
+    <!-- ======================================
+         TIMER TAB
+         ====================================== -->
+    <div class="tab-panel" id="tab-timer" role="tabpanel">
+
+      <!-- Timer Display -->
+      <div class="timer-display">
+        <div class="timer-time" id="timer-display">25:00</div>
+        <div class="timer-label" id="timer-label">Ready to focus</div>
+      </div>
+
+      <!-- Presets -->
+      <div class="preset-row">
+        <button class="preset-btn" data-minutes="15">15m</button>
+        <button class="preset-btn active" data-minutes="25">25m</button>
+        <button class="preset-btn" data-minutes="45">45m</button>
+        <button class="preset-btn" data-minutes="60">60m</button>
+        <button class="preset-btn" data-minutes="90">90m</button>
+      </div>
+
+      <!-- Task Input -->
+      <div class="input-row mb-10">
+        <input type="text" id="timer-task-input" placeholder="What are you working on?" />
+      </div>
+
+      <!-- Controls -->
+      <div class="timer-controls">
+        <button class="btn btn-primary" id="timer-start-btn">Start</button>
+        <button class="btn btn-secondary hidden" id="timer-pause-btn">Pause</button>
+        <button class="btn btn-secondary hidden" id="timer-resume-btn">Resume</button>
+        <button class="btn btn-danger hidden" id="timer-stop-btn">Stop</button>
+      </div>
+
+      <!-- Session Info -->
+      <div class="session-info">
+        <span id="timer-session-count">Session 1 of 4</span>
+        <span class="xp-potential" id="timer-xp-potential">+125 XP</span>
+      </div>
+    </div>
+
+    <!-- ======================================
+         PLAN TAB
+         ====================================== -->
+    <div class="tab-panel" id="tab-plan" role="tabpanel">
+
+      <!-- Morning Planning -->
+      <div class="section-label">☀️ Morning Planning</div>
+
+      <div class="card">
+        <div class="card-title">#1 Priority Today</div>
+        <input type="text" id="plan-priority" placeholder="What's your #1 priority today?" />
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tasks</div>
+        <div class="input-row">
+          <input type="text" id="plan-task-input" placeholder="Add a task..." style="flex:1" />
+          <select id="plan-task-estimate" style="width:80px;flex:none">
+            <option value="15">15m</option>
+            <option value="30" selected>30m</option>
+            <option value="45">45m</option>
+            <option value="60">1h</option>
+            <option value="120">2h</option>
+          </select>
+          <button class="btn btn-primary btn-sm" id="plan-add-task">Add</button>
+        </div>
+        <ul class="task-list" id="plan-task-list">
+          <!-- tasks rendered here -->
+        </ul>
+
+        <!-- Workload -->
+        <div class="workload-bar-container">
+          <div class="workload-label">
+            <span id="plan-workload-planned">0 hrs planned</span>
+            <span id="plan-workload-available">8 hrs available</span>
+          </div>
+          <div class="workload-bar">
+            <div class="workload-bar-fill" id="plan-workload-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <hr class="divider" />
+
+      <!-- Evening Shutdown -->
+      <div class="section-label">🌙 Evening Shutdown</div>
+
+      <div class="card">
+        <div class="card-title">Daily Reflection</div>
+        <textarea id="plan-reflection" placeholder="How did today go? What did you learn?"></textarea>
+      </div>
+
+      <div class="card">
+        <div class="card-title">How focused were you today?</div>
+        <div class="rating-row" id="plan-rating-row">
+          <button class="rating-btn" data-rating="1">1</button>
+          <button class="rating-btn" data-rating="2">2</button>
+          <button class="rating-btn" data-rating="3">3</button>
+          <button class="rating-btn" data-rating="4">4</button>
+          <button class="rating-btn" data-rating="5">5</button>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary btn-full" id="plan-move-incomplete">Move Incomplete → Tomorrow</button>
+      </div>
+      <button class="btn btn-primary btn-full" id="plan-save">Save Plan</button>
+    </div>
+
+    <!-- ======================================
+         SETTINGS TAB
+         ====================================== -->
+    <div class="tab-panel" id="tab-settings" role="tabpanel">
+
+      <!-- Distraction Sites -->
+      <div class="card">
+        <div class="card-title">Distraction Sites</div>
+        <ul class="site-list" id="settings-site-list">
+          <!-- sites rendered here -->
+        </ul>
+        <div class="input-row">
+          <input type="text" id="settings-site-input" placeholder="Add domain (e.g. tiktok.com)" style="flex:1" />
+          <button class="btn btn-primary btn-sm" id="settings-add-site">Add</button>
+        </div>
+      </div>
+
+      <!-- Tab Limit -->
+      <div class="card">
+        <div class="card-title">Tab Limit</div>
+        <div class="slider-row">
+          <input type="range" id="settings-tab-limit" min="5" max="30" value="15" />
+          <span class="slider-value" id="settings-tab-limit-value">15</span>
+        </div>
+      </div>
+
+      <!-- Toggles -->
+      <div class="card">
+        <div class="card-title">Notifications & Nudges</div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Focus Nudge Interval</div>
+          </div>
+          <select id="settings-nudge-interval" style="width:90px">
+            <option value="15">15 min</option>
+            <option value="30" selected>30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Break Reminders</div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-break-reminders" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Notification Sound</div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-notification-sound" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Feed Hiding</div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-feed-hiding" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Focus Mode Options -->
+      <div class="card">
+        <div class="card-title">Focus Mode Features</div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#6366f122;">🚫</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Block Distraction Sites</div>
+            <div class="focus-feature-desc">Redirect away from blocked sites during focus</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-block" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#f59e0b22;">👁️</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Hide Social Feeds</div>
+            <div class="focus-feature-desc">Blur feeds on YouTube, Twitter, Reddit, etc.</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-feeds" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#22c55e22;">📑</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Limit Open Tabs</div>
+            <div class="focus-feature-desc">Warn when you open too many tabs</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-tabs" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#ef444422;">🔕</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Mute Notifications</div>
+            <div class="focus-feature-desc">Suppress browser notifications during focus</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-mute" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#8b5cf622;">⏱️</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Pomodoro Auto-Breaks</div>
+            <div class="focus-feature-desc">Auto-start breaks between focus sessions</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-autobreak" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#06b6d422;">🌙</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Grayscale Mode</div>
+            <div class="focus-feature-desc">Make distracting sites black & white</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-grayscale" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="focus-feature-card">
+          <div class="focus-feature-icon" style="background:#ec489922;">📊</div>
+          <div class="focus-feature-info">
+            <div class="focus-feature-name">Focus Score Tracking</div>
+            <div class="focus-feature-desc">Track distractions and tab switches per session</div>
+          </div>
+          <label class="toggle-switch" style="transform:scale(0.7);flex-shrink:0;">
+            <input type="checkbox" id="settings-fm-scoring" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Clear Data -->
+      <button class="btn btn-danger btn-full" id="settings-clear-data">Clear All Data</button>
+    </div>
+
+    <!-- ======================================
+         SAVED TABS TAB
+         ====================================== -->
+    <div class="tab-panel" id="tab-saved" role="tabpanel">
+      <div class="saved-tabs-header">
+        <div class="card-title">Saved Tabs</div>
+        <span class="saved-tabs-count" id="saved-tabs-count">0 tabs</span>
+      </div>
+      <div id="saved-tabs-list">
+        <div class="saved-tabs-empty">No saved tabs yet. When you close tabs during focus mode, they'll appear here.</div>
+      </div>
+      <div class="btn-group" style="margin-top:12px;">
+        <button class="btn btn-secondary btn-full" id="saved-restore-all">Restore All</button>
+        <button class="btn btn-danger btn-full" id="saved-clear-all" style="margin-top:6px;">Clear All</button>
+      </div>
+    </div>
+
+  </div><!-- /tab-content-wrapper -->
 
   <script src="popup.js"></script>
 </body>

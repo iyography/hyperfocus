@@ -17,14 +17,14 @@ export default function ProgressBar({
 
   return (
     <div className={cn('w-full', className)}>
-      <div className="w-full h-2 bg-bg-elevated rounded-full overflow-hidden">
+      <div className="w-full h-2 bg-elevated rounded-full overflow-hidden">
         <div
           className={cn('h-full rounded-full transition-all duration-700 ease-out', color)}
           style={{ width: `${clampedProgress * 100}%` }}
         />
       </div>
       {showLabel && (
-        <span className="text-xs text-text-secondary mt-1 block text-right">
+        <span className="text-xs text-secondary mt-1 block text-right">
           {Math.round(clampedProgress * 100)}%
         </span>
       )}

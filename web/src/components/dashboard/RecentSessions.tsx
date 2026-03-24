@@ -28,16 +28,16 @@ export default function RecentSessions() {
 
   return (
     <Card data-tour="recent-sessions">
-      <h3 className="text-lg font-semibold text-text-primary mb-4">Recent Sessions</h3>
-      <div className="space-y-3">
+      <h3 className="text-lg font-semibold text-foreground mb-4">Recent Sessions</h3>
+      <div className="space-y-1">
         {recent.map((session) => (
           <div
             key={session.id}
-            className="flex items-center justify-between py-2 border-b border-border last:border-0"
+            className="flex items-center justify-between py-3 px-3 -mx-3 rounded-xl border-b border-themed-border last:border-0 hover:bg-surface/60 transition-colors"
           >
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium text-text-primary truncate">{session.task}</div>
-              <div className="text-xs text-text-secondary">
+              <div className="text-sm font-medium text-foreground truncate">{session.task}</div>
+              <div className="text-xs text-secondary mt-0.5">
                 {formatDate(session.createdAt)} &middot; {formatDuration(session.actualDuration)}
               </div>
             </div>

@@ -46,7 +46,7 @@ export default function TimerDisplay({
           cy={dimensions / 2}
           r={radius}
           fill="none"
-          stroke="var(--color-bg-elevated)"
+          stroke="var(--th-elevated)"
           strokeWidth={strokeWidth}
         />
         {/* Progress ring */}
@@ -55,7 +55,7 @@ export default function TimerDisplay({
           cy={dimensions / 2}
           r={radius}
           fill="none"
-          stroke={isOvertime ? 'var(--color-warning)' : 'var(--color-accent)'}
+          stroke={isOvertime ? 'var(--color-warning)' : 'var(--th-accent)'}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -68,12 +68,12 @@ export default function TimerDisplay({
           cy={dimensions / 2}
           r={radius}
           fill="none"
-          stroke={isOvertime ? 'var(--color-warning)' : 'var(--color-accent)'}
+          stroke={isOvertime ? 'var(--color-warning)' : 'var(--th-accent)'}
           strokeWidth={strokeWidth + 6}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
-          opacity={0.15}
+          opacity={0.12}
           filter="blur(8px)"
           transition={{ duration: 0.5, ease: 'linear' }}
         />
@@ -88,7 +88,7 @@ export default function TimerDisplay({
           className={cn(
             'font-mono font-bold tabular-nums',
             size === 'lg' ? 'text-5xl md:text-6xl' : 'text-3xl',
-            isOvertime ? 'text-warning' : 'text-text-primary',
+            isOvertime ? 'text-warning' : 'text-foreground',
           )}
         >
           {isOvertime ? `+${formatTime(overtimeElapsed)}` : formatTime(timeRemaining)}

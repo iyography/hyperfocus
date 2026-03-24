@@ -32,42 +32,87 @@ export default function TaskBreakdownPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex items-center justify-center min-h-[60vh]"
+      className="min-h-[70vh] flex items-center"
     >
-      <Card glow className="max-w-lg w-full text-center">
-        <div className="text-sm text-accent mb-4 font-medium">Today's Focus</div>
-        <h2 className="text-xl font-bold text-text-primary mb-6">{todayCheckIn.task}</h2>
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {/* Main content - left 2 cols */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Original intention label */}
+            <div>
+              <p className="uppercase tracking-widest text-xs text-secondary mb-2">
+                Original Intention
+              </p>
+              <p className="text-foreground italic text-lg">"{todayCheckIn.task}"</p>
+            </div>
 
-        <div className="bg-[rgba(19,19,26,0.7)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-xl p-4 mb-6">
-          <p className="text-text-secondary text-sm mb-1">That sounds like a big task.</p>
-          <p className="text-text-primary font-semibold">What is the first tiny step?</p>
-        </div>
+            {/* Big heading */}
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+              That sounds like a{' '}
+              <span className="text-accent">big task.</span>
+              <br />
+              What is the first tiny step?
+            </h1>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={firstStep}
-            onChange={(e) => setFirstStep(e.target.value)}
-            placeholder="e.g. Outline landing page sections"
-            autoFocus
-            className="w-full bg-bg-elevated border border-border rounded-xl px-5 py-4 text-lg text-text-primary placeholder:text-[rgba(136,136,160,0.4)] focus:outline-none focus:border-accent focus:shadow-[0_0_20px_var(--color-accent-glow)] transition-all duration-200 mb-6"
-          />
-          <div className="flex gap-3">
-            <Button
-              type="button"
-              variant="ghost"
-              size="lg"
-              onClick={handleSkip}
-              className="flex-1"
-            >
-              Skip
-            </Button>
-            <Button type="submit" size="lg" className="flex-1">
-              Set First Step
-            </Button>
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <input
+                type="text"
+                value={firstStep}
+                onChange={(e) => setFirstStep(e.target.value)}
+                placeholder="Type your first actionable micro-step..."
+                autoFocus
+                className="w-full bg-input border border-input-border rounded-2xl px-6 py-5 text-lg text-foreground placeholder:text-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 transition-all duration-200"
+              />
+              <p className="text-secondary text-sm">
+                Suggested: "Open Figma design file" or "Create task list"
+              </p>
+
+              <div className="flex gap-3 pt-4">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="lg"
+                  onClick={handleSkip}
+                >
+                  Skip
+                </Button>
+                <Button type="submit" size="lg" className="px-10 rounded-full">
+                  Start Focus Session
+                </Button>
+              </div>
+            </form>
           </div>
-        </form>
-      </Card>
+
+          {/* Side cards - right col */}
+          <div className="space-y-5">
+            {/* Newton's First Law card */}
+            <Card className="relative overflow-hidden">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-9 h-9 rounded-lg bg-accent-soft flex items-center justify-center flex-shrink-0">
+                  <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="uppercase tracking-widest text-xs text-secondary mb-1">Science Tip</p>
+                  <h3 className="text-base font-bold text-foreground">Newton's First Law</h3>
+                </div>
+              </div>
+              <p className="text-secondary text-sm leading-relaxed">
+                An object at rest stays at rest. The first 2 minutes of a task are the most critical for overcoming procrastination.
+              </p>
+            </Card>
+
+            {/* Focus Hub mini card */}
+            <Card className="text-center">
+              <p className="uppercase tracking-widest text-xs text-secondary mb-2">Focus Hub</p>
+              <div className="text-3xl font-mono font-bold text-accent tabular-nums">25:00</div>
+              <p className="text-xs text-secondary mt-1">Ready to begin</p>
+            </Card>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }

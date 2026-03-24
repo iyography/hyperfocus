@@ -15,18 +15,17 @@ export default function CTASection({ onViewDemo }: CTASectionProps) {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="bg-[rgba(19,19,26,0.7)] backdrop-blur-xl border border-[rgba(42,42,58,0.5)] rounded-3xl p-12 relative overflow-hidden">
+        <div className="bg-card glass border border-card-border rounded-3xl p-12 relative overflow-hidden shadow-elevated">
           {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgba(124,92,255,0.08)] to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.06] to-transparent pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-accent/[0.05] blur-[60px] pointer-events-none" />
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10 text-text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 relative z-10 text-foreground">
             Ready to{' '}
-            <span className="bg-gradient-to-r from-accent to-purple-400 bg-clip-text text-transparent">
-              lock in
-            </span>
+            <span className="text-gradient">lock in</span>
             ?
           </h2>
-          <p className="text-text-secondary text-lg mb-8 relative z-10">
+          <p className="text-secondary text-lg mb-8 relative z-10">
             See how Hyperfocus transforms your daily workflow. Try the interactive demo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -41,7 +40,7 @@ export default function CTASection({ onViewDemo }: CTASectionProps) {
       </motion.div>
 
       {/* Footer */}
-      <div className="text-center mt-16 text-[rgba(136,136,160,0.5)] text-sm">
+      <div className="text-center mt-16 text-muted text-sm">
         <p>Built with focus, for focus.</p>
       </div>
     </section>

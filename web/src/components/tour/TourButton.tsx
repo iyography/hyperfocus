@@ -8,7 +8,7 @@ import { useDemo } from '@/providers/DemoProvider';
 const tourConfig = {
   showProgress: true,
   animate: true,
-  overlayColor: 'rgba(0, 0, 0, 0.7)',
+  overlayColor: 'rgba(0, 0, 0, 0.5)',
   popoverClass: 'hyperfocus-tour-popover',
   stagePadding: 8,
   stageRadius: 12,
@@ -35,11 +35,9 @@ export default function TourButton() {
     driverObj.drive();
   }, [location.pathname]);
 
-  // Auto-start tour on first demo entry (dashboard)
   useEffect(() => {
     if (isDemo && location.pathname.includes('dashboard') && !autoStartedRef.current) {
       autoStartedRef.current = true;
-      // Small delay to let the page render fully
       const timeout = setTimeout(() => {
         startTour();
       }, 800);
@@ -55,7 +53,7 @@ export default function TourButton() {
   return (
     <button
       onClick={startTour}
-      className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50 w-12 h-12 rounded-full bg-accent text-white shadow-[0_0_20px_rgba(124,92,255,0.2)] hover:shadow-[0_0_30px_rgba(124,92,255,0.3)] flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
+      className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50 w-12 h-12 rounded-2xl bg-accent text-white shadow-elevated glow-sm flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
       title="Take a guided tour"
     >
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

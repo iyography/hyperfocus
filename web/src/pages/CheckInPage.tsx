@@ -25,10 +25,15 @@ export default function CheckInPage() {
       className="flex items-center justify-center min-h-[60vh]"
     >
       <Card glow className="max-w-lg w-full text-center">
-        <h1 className="text-3xl font-bold text-text-primary mb-2">
-          What would make today a <span className="text-accent">win</span>?
+        <div className="w-14 h-14 rounded-2xl bg-accent-soft flex items-center justify-center mx-auto mb-5">
+          <svg className="w-7 h-7 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+        </div>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          What would make today a <span className="text-gradient">win</span>?
         </h1>
-        <p className="text-text-secondary mb-8">
+        <p className="text-secondary mb-8">
           Pick the one task that matters most right now.
         </p>
 
@@ -39,7 +44,7 @@ export default function CheckInPage() {
             onChange={(e) => setTask(e.target.value)}
             placeholder="e.g. Build landing page"
             autoFocus
-            className="w-full bg-bg-elevated border border-border rounded-xl px-5 py-4 text-lg text-text-primary placeholder:text-[rgba(136,136,160,0.4)] focus:outline-none focus:border-accent focus:shadow-[0_0_20px_var(--color-accent-glow)] transition-all duration-200 mb-6"
+            className="w-full bg-input border border-input-border rounded-xl px-5 py-4 text-lg text-foreground placeholder:text-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 transition-all duration-200 mb-6"
           />
           <Button type="submit" size="lg" disabled={!task.trim()} className="w-full">
             Set Today's Focus

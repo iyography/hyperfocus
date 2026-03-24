@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+  <defs>
+    <!-- Mark gradients -->
+    <radialGradient id="lm1" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lm2" cx="70%" cy="70%" r="65%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3730a3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lm3" cx="65%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lring" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="lh" x1="24" y1="24" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+
+    <!-- Text gradient for "FOCUS" -->
+    <linearGradient id="focusGrad" x1="220" y1="30" x2="380" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="40%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="lglow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="lglowSm" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0"/>
+    </filter>
+
+    <clipPath id="lclip">
+      <rect x="10" y="10" width="80" height="80" rx="20"/>
+    </clipPath>
+  </defs>
+
+  <!-- === MARK (left side) === -->
+  <!-- Glow behind mark -->
+  <rect x="10" y="10" width="80" height="80" rx="20" fill="#6366f1" filter="url(#lglow)" opacity="0.4"/>
+
+  <!-- Base shape -->
+  <rect x="10" y="10" width="80" height="80" rx="20" fill="#0f0f1a"/>
+
+  <!-- Mesh gradient layers -->
+  <g clip-path="url(#lclip)">
+    <rect x="10" y="10" width="80" height="80" fill="url(#lm1)"/>
+    <rect x="10" y="10" width="80" height="80" fill="url(#lm2)"/>
+    <rect x="10" y="10" width="80" height="80" fill="url(#lm3)"/>
+  </g>
+
+  <!-- Border -->
+  <rect x="10" y="10" width="80" height="80" rx="20" fill="none" stroke="url(#lring)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Focus ring -->
+  <circle cx="50" cy="50" r="27" fill="none" stroke="url(#lring)" stroke-width="1" opacity="0.2"/>
+
+  <!-- H mark -->
+  <g filter="url(#lglowSm)">
+    <rect x="34" y="30" width="4.5" height="40" rx="2.25" fill="url(#lh)"/>
+    <rect x="61.5" y="30" width="4.5" height="40" rx="2.25" fill="url(#lh)"/>
+    <rect x="36.25" y="47.75" width="27.5" height="4.5" rx="2.25" fill="url(#lh)"/>
+  </g>
+
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="2.5" fill="#f59e0b" opacity="0.65" filter="url(#lglowSm)"/>
+  <circle cx="50" cy="50" r="1.2" fill="#fef3c7"/>
+
+  <!-- === TEXT === -->
+  <!-- "HYPER" in white -->
+  <text x="108" y="62" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="700" letter-spacing="3" fill="#f0f0f5">HYPER</text>
+
+  <!-- "FOCUS" in gradient -->
+  <text x="260" y="62" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="700" letter-spacing="3" fill="url(#focusGrad)">FOCUS</text>
+</svg>

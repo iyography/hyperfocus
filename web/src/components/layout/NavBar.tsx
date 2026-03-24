@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router';
 import { cn } from '@/lib/cn';
+import { InlineThemeToggle } from '@/components/ui/ThemeToggle';
 
 const navItems = [
   { to: '/app/dashboard', label: 'Dashboard', tourId: 'nav-dashboard' },
@@ -13,15 +14,15 @@ export default function NavBar() {
       aria-label="Main navigation"
       className={cn(
         'fixed bottom-0 left-0 right-0 z-40',
-        'bg-[rgba(19,19,26,0.85)] backdrop-blur-xl border-t border-[rgba(42,42,58,0.5)]',
-        'md:sticky md:top-10 md:bottom-auto md:border-t-0 md:border-b',
+        'bg-card glass-strong border-t border-card-border',
+        'md:sticky md:top-0 md:bottom-auto md:border-t-0 md:border-b',
       )}
     >
       <div className="max-w-5xl mx-auto px-6">
-        <div className="flex items-center justify-between h-14">
-          <NavLink to="/app/dashboard" className="text-lg font-bold">
-            <span className="text-accent">Hyper</span>
-            <span className="text-text-primary">focus</span>
+        <div className="flex items-center justify-between h-16">
+          <NavLink to="/app/dashboard" className="text-lg font-bold tracking-tight">
+            <span className="text-gradient">Hyper</span>
+            <span className="text-foreground">focus</span>
           </NavLink>
 
           <div className="flex items-center gap-1">
@@ -32,16 +33,19 @@ export default function NavBar() {
                 data-tour={item.tourId}
                 className={({ isActive }) =>
                   cn(
-                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
                     isActive
-                      ? 'bg-[rgba(124,92,255,0.15)] text-accent'
-                      : 'text-text-secondary hover:text-text-primary hover:bg-[rgba(28,28,39,0.8)]',
+                      ? 'bg-accent-soft text-accent'
+                      : 'text-secondary hover:text-foreground hover:bg-surface',
                   )
                 }
               >
                 {item.label}
               </NavLink>
             ))}
+            <div className="ml-2 hidden md:block">
+              <InlineThemeToggle />
+            </div>
           </div>
         </div>
       </div>
